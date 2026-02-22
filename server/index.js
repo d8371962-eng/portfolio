@@ -710,7 +710,18 @@ const distPath = path.join(process.cwd(), 'dist');
 import fs from 'fs';
 
 if (fs.existsSync(distPath)) {
-  app.use(express.static(distPath));
+  // Serve static assets with caching headers to improve performance
+  app.use(express.static(distPath, {
+    maxAge: '1d',
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('.html')) {
+        // HTML should not be aggressively cached
+        res.setHeader('Cache-Control', 'no-cache');
+      } else if (filePath.match(/\.(js|css|svg|png|jpg|webp)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      }
+    }
+  }));
 
   // Return index.html for non-API routes (SPA fallback)
   app.get('*', (req, res, next) => {

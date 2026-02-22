@@ -8,7 +8,8 @@ import {
   ExternalLink, Eye, Facebook, MessageCircle, Phone
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import About from './About'; // Import the About component
+const About = React.lazy(() => import('./About'));
+import { Suspense } from 'react';
 
 const API_BASE_URL = '/api';
 
@@ -138,7 +139,7 @@ const FloatingOrb = ({ className, delay = 0, size = "normal" }) => {
         ease: "easeInOut"
       }}
       className={`absolute rounded-full blur-3xl ${className}`}
-      style={{ width: sizes[size].width, height: sizes[size].height }}
+      style={{ width: sizes[size].width, height: sizes[size].height, willChange: 'transform, opacity' }}
     />
   );
 };
@@ -152,8 +153,8 @@ const TiltCard = ({ children, className = "", perspective = 1000 }) => {
   const rotateX = useTransform(y, [-0.5, 0.5], [15, -15]);
   const rotateY = useTransform(x, [-0.5, 0.5], [-15, 15]);
   
-  const rotateXSpring = useSpring(rotateX, { stiffness: 300, damping: 30 });
-  const rotateYSpring = useSpring(rotateY, { stiffness: 300, damping: 30 });
+  const rotateXSpring = useSpring(rotateX, { stiffness: 120, damping: 18 });
+  const rotateYSpring = useSpring(rotateY, { stiffness: 120, damping: 18 });
 
   const handleMouseMove = (e) => {
     if (!ref.current) return;
@@ -192,7 +193,8 @@ const CursorFollower = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
-  const springConfig = { damping: 25, stiffness: 700 };
+  // lower stiffness for smoother, less jittery cursor follow
+  const springConfig = { damping: 30, stiffness: 200 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -202,7 +204,8 @@ const CursorFollower = () => {
       cursorY.set(e.clientY - 16);
     };
     
-    window.addEventListener('mousemove', moveCursor);
+    // use passive listener for better scrolling performance
+    window.addEventListener('mousemove', moveCursor, { passive: true });
     return () => window.removeEventListener('mousemove', moveCursor);
   }, [cursorX, cursorY]);
 
@@ -346,7 +349,7 @@ const FeatureCard = ({ icon, title, description, color, idx }) => {
       <div className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl sm:rounded-3xl`} />
       <div className="relative z-10">
         <motion.div 
-          whileHover={{ rotate: 360, scale: 1.12 }}
+          whileHover={{ rotate: 12, scale: 1.12 }}
           transition={{ duration: 0.7, type: "spring" }}
           className={`w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 ${color} rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 sm:mb-7 lg:mb-8 group-hover:scale-110 transition-transform duration-300 shadow-xl shadow-black/40`}
         >
@@ -452,7 +455,7 @@ const SkillBar = ({ tech, idx }) => {
       <div className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl sm:rounded-3xl`} />
       <div className="relative z-10 flex flex-col items-center w-full">
         <motion.div 
-          whileHover={{ rotate: 360, scale: 1.15 }}
+          whileHover={{ rotate: 12, scale: 1.15 }}
           transition={{ duration: 0.8, type: "spring" }}
           className={`p-4 sm:p-5 lg:p-6 bg-gradient-to-br ${tech.color} rounded-xl shadow-xl shadow-black/40 group-hover:shadow-2xl transition-shadow duration-300 mb-2`}
         >
@@ -507,10 +510,11 @@ const ProjectCard = ({ project, idx }) => {
       style={{ rotateZ }}
       className="group cursor-pointer"
     >
-      <div className="relative aspect-[4/5] rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800/60 hover:border-lime-500/40 transition-all duration-500 shadow-2xl shadow-black/40">
+      <div className="relative aspect-[4/5] rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800/60 hover:border-lime-500/40 transition-transform duration-500 shadow-2xl shadow-black/40">
         {/* Animated border glow */}
         <motion.div 
           className="absolute -inset-1 bg-gradient-to-r from-lime-500/30 via-emerald-500/30 to-cyan-500/30 opacity-0 group-hover:opacity-60 transition-opacity duration-500 blur-xl"
+          style={{ willChange: 'transform, opacity' }}
           animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
           transition={{ duration: 4, repeat: Infinity }}
         />
@@ -519,7 +523,8 @@ const ProjectCard = ({ project, idx }) => {
           <img 
             src={project.image} 
             alt={project.title} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-115"
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
@@ -711,21 +716,37 @@ export default function App() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-0.5 bg-slate-900/60 backdrop-blur-lg rounded-full px-2 py-2 border border-slate-700/40 shadow-xl shadow-black/30">
             {['Home', 'About', 'Services', 'Projects', 'Reviews', 'Contact'].map((item) => (
-              <motion.a 
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className={`px-6 py-2 text-sm font-semibold rounded-full transition-all duration-300 relative group ${activeSection === item.toLowerCase() ? 'text-white bg-gradient-to-r from-emerald-500/40 to-lime-500/30 shadow-lg shadow-emerald-500/25 border border-emerald-400/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent'}`}
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item}
-                <motion.span 
-                  className="absolute -bottom-1.5 left-6 right-6 h-1 bg-gradient-to-r from-emerald-400 to-lime-400 rounded-full blur-sm"
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={{ scaleX: activeSection === item.toLowerCase() ? 1 : 0, opacity: activeSection === item.toLowerCase() ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.a>
+              item === 'Projects' ? (
+                <a
+                  key={item}
+                  href="/projects"
+                  className={`px-6 py-2 text-sm font-semibold rounded-full transition-all duration-300 relative group ${activeSection === item.toLowerCase() ? 'text-white bg-gradient-to-r from-emerald-500/40 to-lime-500/30 shadow-lg shadow-emerald-500/25 border border-emerald-400/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent'}`}
+                >
+                  {item}
+                  <motion.span
+                    className="absolute -bottom-1.5 left-6 right-6 h-1 bg-gradient-to-r from-emerald-400 to-lime-400 rounded-full blur-sm"
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{ scaleX: activeSection === item.toLowerCase() ? 1 : 0, opacity: activeSection === item.toLowerCase() ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </a>
+              ) : (
+                <motion.a 
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className={`px-6 py-2 text-sm font-semibold rounded-full transition-all duration-300 relative group ${activeSection === item.toLowerCase() ? 'text-white bg-gradient-to-r from-emerald-500/40 to-lime-500/30 shadow-lg shadow-emerald-500/25 border border-emerald-400/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent'}`}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {item}
+                  <motion.span 
+                    className="absolute -bottom-1.5 left-6 right-6 h-1 bg-gradient-to-r from-emerald-400 to-lime-400 rounded-full blur-sm"
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{ scaleX: activeSection === item.toLowerCase() ? 1 : 0, opacity: activeSection === item.toLowerCase() ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.a>
+              )
             ))}
           </div>
 
@@ -862,7 +883,9 @@ export default function App() {
               <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">Freelance <GradientText>Web Developer</GradientText></h2>
             </motion.div>
 
-            <About about={about} />
+            <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading…</div>}>
+              <About about={about} />
+            </Suspense>
 
             <div className="grid lg:grid-cols-2 gap-6 xs:gap-8 sm:gap-10 md:gap-16 lg:gap-24 items-center">
               <div className="space-y-6 sm:space-y-8 lg:space-y-10">
@@ -1161,36 +1184,12 @@ export default function App() {
           </div>
         </section>
 
-        {/* Projects Section */}
-        <section id="projects" className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-10 xs:mb-12 sm:mb-16 md:mb-20 lg:mb-28 text-center"
-            >
-              <motion.span 
-                className="inline-block text-emerald-400 font-bold tracking-widest uppercase text-xs px-4 xs:px-5 py-2 xs:py-2.5 bg-emerald-400/10 rounded-full border border-emerald-400/30 mb-4 xs:mb-5 sm:mb-6 md:mb-8"
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(16, 185, 129, 0.15)" }}
-              >
-                Portfolio
-              </motion.span>
-              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">Recent <GradientText>Projects</GradientText></h2>
-            </motion.div>
-
-            {projects.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-7 sm:gap-8 md:gap-10 lg:gap-12">
-                {projects.map((project) => (
-                  <ProjectCard key={project._id} project={project} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-20 sm:py-32 bg-slate-800/40 rounded-2xl lg:rounded-3xl border border-slate-700/40">
-                <Rocket className="w-24 h-24 text-slate-700 mx-auto mb-8" />
-                <p className="text-slate-400 text-2xl">Projects coming soon...</p>
-              </div>
-            )}
+        {/* Projects Shortcut */}
+        <section className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-black mb-6">Recent <GradientText>Projects</GradientText></h2>
+            <p className="text-slate-400 mb-8">I've moved the full projects portfolio to its own page for a better browsing experience.</p>
+            <a href="/projects" className="inline-flex items-center gap-3 px-8 py-4 bg-emerald-400 text-slate-900 font-semibold rounded-xl shadow-lg hover:opacity-95 transition">View Projects</a>
           </div>
         </section>
 
