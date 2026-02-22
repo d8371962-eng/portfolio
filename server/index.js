@@ -43,7 +43,10 @@ const initDB = async () => {
         image TEXT,
         contributions TEXT,
         liveUrl TEXT,
-        githubUrl TEXT
+        githubUrl TEXT,
+        views INTEGER DEFAULT 0,
+        likes INTEGER DEFAULT 0,
+        difficulty TEXT
       );
       
       CREATE TABLE IF NOT EXISTS education (

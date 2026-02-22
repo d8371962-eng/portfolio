@@ -134,182 +134,260 @@ const seedDatabase = async () => {
         category: 'Web Development',
         description: 'A full-stack billing system with separate frontend and backend. Features include product management, customer management, billing/invoicing, and reporting.',
         tech: ['Node.js', 'Express.js', 'MongoDB', 'HTML', 'CSS', 'JavaScript'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Content Management System (CMS)',
         category: 'Web Development',
         description: 'A comprehensive parcel tracking and management system with customer and admin portals. Supports user management, branch management, parcel tracking, and reporting.',
         tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'Content Management Platform',
         category: 'Web Development',
         description: 'A role-based content management system with multi-user support including Admin, Creator, Consumer, Distributor, and Monitor roles.',
         tech: ['Node.js', 'Express.js', 'MongoDB', 'JWT'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'Emergency Ambulance Hiring Portal',
         category: 'Web Development',
         description: 'A web portal for booking emergency ambulances with real-time tracking, admin dashboard for ambulance management, and comprehensive reporting system.',
         tech: ['PHP', 'HTML', 'CSS', 'Bootstrap', 'JavaScript', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Employee Management System (EMS)',
         category: 'Web Development',
         description: 'A PHP-based employee management system for admin and employee-level users. Features include employee registration, leave management, salary management, and project assignment.',
         tech: ['PHP', 'HTML', 'CSS', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Beginner'
       },
       {
         title: 'Healthiet - Health & Diet Application',
         category: 'Web Development',
         description: 'A comprehensive health and diet management application featuring BMI calculator, calorie calculator, diet plans, workout management, mentor-mentee chat system, and recipe management.',
         tech: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express.js', 'MongoDB', 'Firebase'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'Helping Hand - NGO Platform',
         category: 'Web Development',
         description: 'A web-based platform for NGO management featuring donation management, event management, volunteer management, and news management.',
         tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Job Portal',
         category: 'Web Development',
         description: 'A comprehensive job portal with separate portals for Job Seekers, Employers, and Administrators. Features include job posting, application tracking, resume management, and employer verification.',
         tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'Natural Disaster Management System',
         category: 'Web Development',
         description: 'A Django-based system for tracking and managing natural disasters including earthquakes, tsunamis, tornadoes, and volcanic eruptions with real-time data visualization.',
         tech: ['Python', 'Django', 'HTML', 'CSS', 'JavaScript', 'SQLite'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'Office Life - HR Management System',
         category: 'Web Development',
         description: 'A Laravel-based comprehensive HR management system featuring employee management, leave tracking, expense management, project management, and performance analytics.',
         tech: ['PHP', 'Laravel', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'Product Listing App',
         category: 'Web Development',
         description: 'A simple and elegant product listing application with category filtering, product cards, and responsive design.',
         tech: ['React.js', 'Node.js', 'Express.js', 'JSON'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Beginner'
       },
       {
         title: 'Project Center Management',
         category: 'Web Development',
         description: 'A comprehensive project management system for educational centers featuring student group management, milestone tracking, progress reporting, meeting scheduling, certificate generation, and AI-powered assistance.',
         tech: ['Node.js', 'Express.js', 'MongoDB', 'JWT', 'Socket.io'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'Portfolio Website',
         category: 'Web Development',
         description: 'A full-stack portfolio website with modern design, contact form functionality, and admin dashboard for content management.',
         tech: ['React', 'Vite', 'Node.js', 'Express.js', 'SQLite'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Reporting System',
         category: 'Desktop Application',
         description: 'A comprehensive billing and reporting software with dashboard, invoice generation, and financial reports.',
         tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Expense Tracker',
         category: 'Web Development',
         description: 'A Django-based expense tracking application with user authentication, transaction management, category filtering, and visual reports.',
         tech: ['Python', 'Django', 'HTML', 'CSS', 'JavaScript', 'SQLite'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Beginner'
       },
       {
         title: 'AI Career Guidance Platform',
         category: 'Web Development',
         description: 'An AI-driven career guidance platform with full usage audit logging, student counseling, institution management, community features, and real-time chat.',
         tech: ['Node.js', 'Express.js', 'MongoDB', 'JWT', 'Socket.io', 'AI Integration'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'RDMS - Request & Document Management System',
         category: 'Web Development',
         description: 'A PHP-based system for managing incident reports, incident tracking, team management, and QR code generation for document verification.',
         tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL', 'QR Code Library'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Cookit - Recipe Management Application',
         category: 'Web Development',
         description: 'A recipe management application with user authentication, recipe CRUD operations, search functionality, and admin dashboard.',
         tech: ['Node.js', 'Express.js', 'MongoDB', 'HTML', 'CSS', 'JavaScript'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Responsive Billing Software',
         category: 'Web Development',
         description: 'A comprehensive billing software for mobile shops with GST support, product management, customer management, purchase tracking, and detailed reporting.',
         tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Smart Billing System',
         category: 'Web Development',
         description: 'A smart billing system with comprehensive features including category management, product management, sales tracking, daily/monthly reports, and user management.',
         tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Student Management System',
         category: 'Web Development',
         description: 'A comprehensive student management system with features for attendance tracking, exam management, class management, subject management, and parent notifications.',
         tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Intermediate'
       },
       {
         title: 'Healthcare Platform',
         category: 'Web Development',
         description: 'A healthcare monitoring platform with patient management, vital sign tracking, alert system, predictive analytics, proxy AI chat, and comprehensive reporting.',
         tech: ['Node.js', 'Express.js', 'MongoDB', 'React', 'Vite', 'Socket.io'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'Weather Application',
         category: 'Web Development',
         description: 'A simple weather application displaying current weather conditions and forecasts.',
         tech: ['HTML', 'CSS', 'JavaScript', 'Weather API'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Beginner'
       },
       {
         title: 'Secret Coder - Learning Platform',
         category: 'Web Development',
         description: 'An online learning platform with course management, assessment creation, student enrollment, gradebook, and certificate generation.',
         tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'SQLite'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'SheShield - Women\'s Safety Application',
         category: 'Mobile Application',
         description: 'A comprehensive women\'s safety Android application with emergency SOS button, emergency contact management, location sharing, and guardian watch integration.',
         tech: ['Android (Kotlin)', 'Java', 'Firebase', 'Google Maps API'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Advanced'
       },
       {
         title: 'Employee Management System (Version 2)',
         category: 'Web Development',
         description: 'Another version of the employee management system with enhanced features for employee registration, leave management, and project assignment.',
         tech: ['PHP', 'HTML', 'CSS', 'MySQL'],
-        image: ''
+        image: '',
+        views: 0,
+        likes: 0,
+        difficulty: 'Beginner'
       }
     ];
 
@@ -317,8 +395,8 @@ const seedDatabase = async () => {
     await db.run('DELETE FROM projects');
     for (const project of projects) {
       await db.run(
-        'INSERT INTO projects (title, category, description, tech, image) VALUES (?, ?, ?, ?, ?)',
-        [project.title, project.category, project.description, JSON.stringify(project.tech), project.image]
+        'INSERT INTO projects (title, category, description, tech, image, views, likes, difficulty) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [project.title, project.category, project.description, JSON.stringify(project.tech), project.image, project.views, project.likes, project.difficulty]
       );
     }
     console.log('✅ Projects seeded');
