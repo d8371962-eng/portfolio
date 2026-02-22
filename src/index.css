@@ -1,0 +1,418 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+body {
+  background: #09090b;
+  background-attachment: fixed;
+  color: #ffffff;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Touch-friendly targets */
+button, a[role="button"], input, textarea, select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Mobile safe area */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  }
+  h3 {
+    font-size: clamp(1.25rem, 3vw, 1.875rem);
+  }
+}
+
+/* Modern Typography with Plus Jakarta Sans */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  line-height: 1.1;
+}
+.gradient-bg {
+  background: linear-gradient(135deg, #0f172a 0%, #1a1f35 50%, #0f172a 100%);
+}
+
+/* Modern Glow Effects */
+.glow-emerald {
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.6), 0 12px 28px rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+}
+
+.glow-lime {
+  box-shadow: 0 0 40px rgba(132, 204, 22, 0.6), 0 12px 28px rgba(132, 204, 22, 0.15);
+  border-color: #84cc16;
+}
+
+.border-accent {
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(132, 204, 22, 0.05));
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+}
+
+button:focus, button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15), 0 8px 24px rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.6);
+}
+
+
+/* Font sizes for headings */
+h1 { font-size: 4rem; margin-bottom: 1.5rem; }
+h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+h3 { font-size: 1.875rem; margin-bottom: 1rem; }
+h4 { font-size: 1.5rem; margin-bottom: 0.875rem; }
+h5 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+h6 { font-size: 1.125rem; margin-bottom: 0.75rem; }
+
+p {
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+/* Professional section spacing */
+section {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Modern input styles */
+input, textarea, select {
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  background-color: rgba(16, 185, 129, 0.05);
+  border-color: #10b981;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #10b981, #84cc16);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #059669, #65a30d);
+}
+
+@media (min-width: 1024px) {
+  section {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+/* Container spacing */
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 80rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Accessibility helpers */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Make skip-link visible when focused */
+.sr-only-focusable {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.sr-only-focusable:focus, .sr-only-focusable:active {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  padding: 0.5rem 1rem !important;
+  background: rgba(16,185,129,0.08);
+  color: #10b981;
+  border-radius: 0.25rem;
+}
+
+/* Make buttons easier to tap and visually consistent */
+button, .btn {
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: transform 120ms ease, box-shadow 160ms ease, background-color 120ms ease;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-2px);
+}
+
+button:active, .btn:active {
+  transform: translateY(0);
+}
+
+/* Primary button utility */
+.btn-primary {
+  background-color: #10b981;
+  color: #09090b;
+  font-weight: 900;
+  padding: 0.875rem 2rem;
+}
+
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+
+.btn-primary:focus {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* Secondary button utility */
+.btn-secondary {
+  background-color: #27272a;
+  color: #ffffff;
+  border: 1px solid #52525b;
+}
+
+.btn-secondary:hover {
+  background-color: #3f3f46;
+  border-color: #10b981;
+}
+
+/* Input focus + invalid states */
+input, textarea, select {
+  padding: 0.75rem 1rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(24, 24, 27, 0.8);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 200ms ease;
+  margin-bottom: 0.5rem;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  border-color: #10b981;
+  background-color: rgba(24, 24, 27, 0.95);
+}
+
+input:invalid, textarea:invalid {
+  border-color: rgba(239, 68, 68, 0.75);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.05);
+}
+
+/* Form group spacing */
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Card styling utilities */
+.card {
+  background-color: rgba(24, 24, 27, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  transition: all 300ms ease;
+}
+
+.card:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  background-color: rgba(24, 24, 27, 0.8);
+}
+
+.card-lg {
+  padding: 2rem;
+  border-radius: 2rem;
+}
+
+.card-sm {
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+/* Spacing utilities */
+.space-y-3 { margin-bottom: 0.75rem; }
+.space-y-4 { margin-bottom: 1rem; }
+.space-y-6 { margin-bottom: 1.5rem; }
+.space-y-8 { margin-bottom: 2rem; }
+.space-y-10 { margin-bottom: 2.5rem; }
+
+.space-x-3 { margin-right: 0.75rem; }
+.space-x-4 { margin-right: 1rem; }
+.space-x-6 { margin-right: 1.5rem; }
+
+/* Padding utilities */
+.p-3 { padding: 0.75rem; }
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+
+/* Margin utilities */
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Gap utilities */
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Responsive hero sizing: cap enormous headings on small screens */
+@media (max-width: 640px) {
+  h1 { font-size: 3.25rem !important; line-height: 1 !important; }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
