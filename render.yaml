@@ -7,8 +7,10 @@ services:
     repo: https://github.com/d8371962-eng/portfolio.git
     branch: main
     autoDeploy: true
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm run start
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NPM_CONFIG_PRODUCTION
+        value: "false"
