@@ -375,20 +375,6 @@ export default function App() {
       </div>
 
       <Modal project={selected} onClose={() => setSelected(null)} />
-
-      {/* Global CSS Overrides */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        @font-face {
-          font-family: 'Inter';
-          font-style: normal;
-          font-weight: 100 900;
-          font-display: swap;
-          src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGkyMZhrib2Bg-4.woff2) format('woff2');
-        }
-        body { font-family: 'Inter', sans-serif; }
-      `}} />
     </div>
   );
 }

@@ -820,7 +820,7 @@ export default function App() {
               
               <div className="flex flex-col xs:flex-row flex-wrap gap-3 xs:gap-4 sm:gap-5 mb-8 xs:mb-10 sm:mb-12 lg:mb-20">
                 <motion.a 
-                  href="#projects" 
+                  href="/projects" 
                   whileHover={{ scale: 1.05, boxShadow: "0 30px 60px rgba(16, 185, 129, 0.4)" }}
                   whileTap={{ scale: 0.93 }}
                   className="inline-flex items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 px-6 xs:px-8 sm:px-10 md:px-12 py-3.5 xs:py-4 sm:py-4.5 md:py-5.5 bg-gradient-to-r from-emerald-400 to-lime-400 text-slate-950 font-bold rounded-full hover:shadow-2xl transition-all duration-300 border border-emerald-300/60 shadow-lg shadow-emerald-400/30 text-sm xs:text-base sm:text-base md:text-base tracking-wide touch-target min-h-[44px] xs:min-h-[48px]"

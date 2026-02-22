@@ -195,6 +195,7 @@ app.get('/api/projects', async (req, res) => {
   try {
     if (isDBConnected()) {
       const data = await db.all('SELECT * FROM projects');
+      console.log('Projects data:', data);
       res.json({ success: true, data });
     } else {
       res.status(500).json({ error: 'Database not connected' });
