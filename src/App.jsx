@@ -319,7 +319,7 @@ const AnimatedCounter = ({ value, duration = 2 }) => {
 };
 
 const GradientText = ({ children, className = "" }) => (
-  <span className={`bg-gradient-to-r from-emerald-400 to-lime-400 bg-clip-text text-transparent ${className}`}>
+  <span className={`text-gradient ${className}`}>
     {children}
   </span>
 );
@@ -331,41 +331,24 @@ const FeatureCard = ({ icon, title, description, color, idx }) => {
   return (
     <motion.div 
       ref={ref}
-      initial={{ opacity: 0, y: 50, rotateX: -15 }}
-      animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ 
-        duration: 0.6, 
-        delay: idx * 0.15,
-        type: "spring",
-        stiffness: 100,
-        damping: 20
+        duration: 0.5, 
+        delay: idx * 0.1
       }}
-      whileHover={{ y: -12, scale: 1.03 }}
-      className="group relative p-8 sm:p-9 lg:p-10 bg-gradient-to-br from-slate-800/40 to-slate-900/30 backdrop-blur-lg border border-slate-700/50 rounded-2xl sm:rounded-3xl hover:border-emerald-500/50 transition-all duration-500 overflow-hidden shadow-xl shadow-black/30"
+      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      className="group relative p-6 sm:p-8 lg:p-10 glass rounded-2xl glow-md overflow-hidden"
     >
-      {/* Animated gradient glow on hover */}
-      <div className={`absolute -inset-1 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-2xl`} />
-      
-      <div className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl sm:rounded-3xl`} />
       <div className="relative z-10">
         <motion.div 
-          whileHover={{ rotate: 12, scale: 1.12 }}
-          transition={{ duration: 0.7, type: "spring" }}
-          className={`w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 ${color} rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 sm:mb-7 lg:mb-8 group-hover:scale-110 transition-transform duration-300 shadow-xl shadow-black/40`}
+          className={`w-12 h-12 sm:w-14 sm:h-14 ${color} rounded-xl flex items-center justify-center mb-4 sm:mb-5 transition-transform duration-300`}
+          whileHover={{ scale: 1.08 }}
         >
-          {React.cloneElement(icon, { className: "w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 text-white" })}
+          {React.cloneElement(icon, { className: "w-6 h-6 sm:w-7 sm:h-7 text-white" })}
         </motion.div>
-        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-3 sm:mb-4 lg:mb-5 group-hover:text-emerald-300 transition-colors duration-300 tracking-tight">{title}</h3>
-        <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed group-hover:text-slate-100 transition-colors duration-300">{description}</p>
-        
-        {/* Arrow appears on hover */}
-        <motion.div 
-          initial={{ opacity: 0, x: -15, y: -10 }}
-          whileHover={{ opacity: 1, x: 0, y: 0 }}
-          className="absolute bottom-8 right-8"
-        >
-          <ArrowRight className="w-6 h-6 text-emerald-400 group-hover:translate-x-2 transition-transform" />
-        </motion.div>
+        <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">{title}</h3>
+        <p className="text-sm sm:text-base text-slate-300">{description}</p>
       </div>
     </motion.div>
   );
@@ -669,10 +652,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white selection:bg-emerald-500/30">
+    <div className="min-h-screen text-white selection:bg-emerald-500/30">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
-        body { font-family: 'Roboto', sans-serif; background-color: #09090b; }
+        body { font-family: 'Roboto', sans-serif; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; }
         html { scroll-behavior: smooth; }
       `}</style>
@@ -681,7 +664,7 @@ export default function App() {
       <FloatingOrbs />
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-slate-950/90 backdrop-blur-2xl border-b border-slate-700/40 shadow-2xl shadow-black/40' : 'bg-transparent border-b border-transparent'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass shadow-lg shadow-black/20' : 'bg-transparent border-b border-transparent'}`}>
         {/* Scroll Progress Bar */}
         <motion.div
           className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-emerald-400 via-lime-400 to-emerald-400 rounded-full shadow-lg shadow-emerald-400/50"
@@ -714,7 +697,7 @@ export default function App() {
           </motion.a>
           
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-0.5 bg-slate-900/60 backdrop-blur-lg rounded-full px-2 py-2 border border-slate-700/40 shadow-xl shadow-black/30">
+          <div className="hidden lg:flex items-center gap-0.5 glass px-2 py-2 shadow-lg shadow-black/20">
             {['Home', 'About', 'Services', 'Projects', 'Reviews', 'Contact'].map((item) => (
               item === 'Projects' ? (
                 <a
@@ -803,7 +786,7 @@ export default function App() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-1.5 xs:gap-2 sm:gap-3 px-3 xs:px-4 sm:px-6 py-2 xs:py-2.5 sm:py-3 bg-slate-800/50 rounded-full border border-slate-700/50 mb-4 xs:mb-6 sm:mb-8 md:mb-10 backdrop-blur-sm"
+                className="inline-flex items-center gap-1.5 xs:gap-2 sm:gap-3 px-3 xs:px-4 sm:px-6 py-2 xs:py-2.5 sm:py-3 glass rounded-full mb-4 xs:mb-6 sm:mb-8 md:mb-10"
               >
                 <span className="w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-2.5 sm:h-2.5 bg-emerald-400 rounded-full animate-pulse" />
                 <span className="text-xs sm:text-sm text-slate-300 font-medium">Available for projects</span>
@@ -821,17 +804,17 @@ export default function App() {
               <div className="flex flex-col xs:flex-row flex-wrap gap-3 xs:gap-4 sm:gap-5 mb-8 xs:mb-10 sm:mb-12 lg:mb-20">
                 <motion.a 
                   href="/projects" 
-                  whileHover={{ scale: 1.05, boxShadow: "0 30px 60px rgba(16, 185, 129, 0.4)" }}
-                  whileTap={{ scale: 0.93 }}
-                  className="inline-flex items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 px-6 xs:px-8 sm:px-10 md:px-12 py-3.5 xs:py-4 sm:py-4.5 md:py-5.5 bg-gradient-to-r from-emerald-400 to-lime-400 text-slate-950 font-bold rounded-full hover:shadow-2xl transition-all duration-300 border border-emerald-300/60 shadow-lg shadow-emerald-400/30 text-sm xs:text-base sm:text-base md:text-base tracking-wide touch-target min-h-[44px] xs:min-h-[48px]"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-primary inline-flex items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 px-6 xs:px-8 sm:px-10 md:px-12 py-3.5 xs:py-4 sm:py-4.5 md:py-5.5 text-sm xs:text-base sm:text-base md:text-base tracking-wide touch-target min-h-[44px] xs:min-h-[48px]"
                 >
                   View My Work <ArrowRight size={18} className="xs:w-5 xs:h-5 sm:w-5 sm:h-5" />
                 </motion.a>
                 <motion.a 
                   href="#contact"
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(30, 41, 59, 0.9)", borderColor: "rgba(16, 185, 129, 0.6)" }}
-                  whileTap={{ scale: 0.93 }}
-                  className="inline-flex items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 px-6 xs:px-8 sm:px-10 md:px-12 py-3.5 xs:py-4 sm:py-4.5 md:py-5.5 bg-slate-800/70 border border-slate-700/60 text-white font-bold rounded-full hover:border-emerald-500/40 hover:shadow-lg hover:shadow-slate-900/30 transition-all duration-300 backdrop-blur-sm text-sm xs:text-base sm:text-base md:text-base tracking-wide touch-target min-h-[44px] xs:min-h-[48px]"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-secondary inline-flex items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 px-6 xs:px-8 sm:px-10 md:px-12 py-3.5 xs:py-4 sm:py-4.5 md:py-5.5 text-sm xs:text-base sm:text-base md:text-base tracking-wide touch-target min-h-[44px] xs:min-h-[48px]"
                 >
                   Start Project
                 </motion.a>
@@ -849,7 +832,7 @@ export default function App() {
                       href={url}
                       whileHover={{ scale: 1.15, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className="p-2.5 xs:p-3 sm:p-3.5 md:p-4 bg-slate-800/50 hover:bg-emerald-500/20 rounded-full text-slate-400 hover:text-emerald-400 transition-all border border-slate-700/30 hover:border-emerald-500/30 touch-target min-w-[40px] min-h-[40px] flex items-center justify-center"
+                      className="p-2.5 xs:p-3 sm:p-3.5 md:p-4 glass-sm hover:border-emerald-500/60 text-slate-400 hover:text-emerald-400 transition-all touch-target min-w-[40px] min-h-[40px] flex items-center justify-center group glow-hover"
                     >
                       {platform === 'github' && <Github size={18} className="xs:w-5 xs:h-5 sm:w-6 sm:h-6" />}
                       {platform === 'linkedin' && <Linkedin size={18} className="xs:w-5 xs:h-5 sm:w-6 sm:h-6" />}
@@ -875,12 +858,12 @@ export default function App() {
               className="mb-10 xs:mb-12 sm:mb-16 md:mb-20 lg:mb-28 text-center"
             >
               <motion.span 
-                className="inline-block text-emerald-400 font-bold tracking-widest uppercase text-xs px-4 xs:px-5 py-2 xs:py-2.5 bg-emerald-400/10 rounded-full border border-emerald-400/30 mb-4 xs:mb-5 sm:mb-6 md:mb-8 text-[10px] xs:text-xs sm:text-xs"
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(16, 185, 129, 0.15)" }}
+                className="inline-block text-blue-400 font-semibold tracking-widest uppercase text-xs px-4 xs:px-5 py-2 xs:py-2.5 glass-sm mb-4 xs:mb-5 sm:mb-6 md:mb-8"
+                whileHover={{ scale: 1.05 }}
               >
-                About Me
+                About
               </motion.span>
-              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">Freelance <GradientText>Web Developer</GradientText></h2>
+              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">I'm a <GradientText>Web Developer</GradientText></h2>
             </motion.div>
 
             <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading…</div>}>
@@ -1125,7 +1108,7 @@ export default function App() {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-b from-slate-800/10 via-transparent to-slate-800/10">
+        <section id="services" className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1134,12 +1117,12 @@ export default function App() {
               className="mb-10 xs:mb-12 sm:mb-16 md:mb-20 lg:mb-28 text-center"
             >
               <motion.span 
-                className="inline-block text-emerald-400 font-bold tracking-widest uppercase text-xs px-4 xs:px-5 py-2 xs:py-2.5 bg-emerald-400/10 rounded-full border border-emerald-400/30 mb-4 xs:mb-5 sm:mb-6 md:mb-8"
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(16, 185, 129, 0.15)" }}
+                className="inline-block text-blue-400 font-semibold tracking-widest uppercase text-xs px-4 xs:px-5 py-2 xs:py-2.5 glass-sm mb-4 xs:mb-5 sm:mb-6 md:mb-8"
+                whileHover={{ scale: 1.05 }}
               >
-                What I Do
+                Services
               </motion.span>
-              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">My <GradientText>Services</GradientText></h2>
+              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">What I <GradientText>Offer</GradientText></h2>
             </motion.div>
 
             <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5 sm:gap-6 md:gap-8 lg:gap-10">
@@ -1151,7 +1134,7 @@ export default function App() {
         </section>
 
         {/* Stats Section */}
-        <section id="stats" className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-r from-emerald-950/20 via-slate-900 to-lime-950/20">
+        <section id="stats" className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
@@ -1161,23 +1144,22 @@ export default function App() {
             >
               {[
                 { number: 30, label: 'Projects Completed', suffix: '+' },
-                { number: 100, label: 'Clients Satisfied', suffix: '%' },
-                { number: 2, label: 'Years of Experience', suffix: '+' }
+                { number: 100, label: 'Client Satisfaction', suffix: '%' },
+                { number: 2, label: 'Years Experience', suffix: '+' }
               ].map((stat, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.12 }}
-                  whileHover={{ scale: 1.08, y: -8 }}
-                  className="p-6 xs:p-7 sm:p-8 md:p-9 lg:p-11 bg-gradient-to-br from-slate-800/50 to-slate-900/40 backdrop-blur-lg border border-slate-700/50 rounded-xl sm:rounded-2xl lg:rounded-3xl text-center hover:border-emerald-500/50 transition-all duration-300 group shadow-xl shadow-black/30 touch-target"
+                  transition={{ delay: idx * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="p-6 xs:p-7 sm:p-8 md:p-9 lg:p-11 glass rounded-2xl lg:rounded-3xl text-center glow-md touch-target"
                 >
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500/10 to-lime-500/10 opacity-0 group-hover:opacity-40 transition-opacity duration-500 blur-xl rounded-xl sm:rounded-2xl lg:rounded-3xl" />
-                  <div className="text-4xl xs:text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-emerald-400 to-lime-400 bg-clip-text text-transparent mb-3 xs:mb-4 sm:mb-5 md:mb-6 lg:mb-8 group-hover:scale-110 transition-transform tracking-tight">
+                  <div className="text-4xl xs:text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gradient mb-3 xs:mb-4 sm:mb-5 md:mb-6 lg:mb-8 tracking-tight">
                     <AnimatedCounter value={stat.number} duration={2} />{stat.suffix}
                   </div>
-                  <p className="text-slate-300 text-xs xs:text-sm sm:text-base md:text-base lg:text-lg font-semibold group-hover:text-slate-100 transition-colors tracking-wide">{stat.label}</p>
+                  <p className="text-slate-300 text-xs xs:text-sm sm:text-base md:text-base lg:text-lg font-medium tracking-wide">{stat.label}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -1186,15 +1168,25 @@ export default function App() {
 
         {/* Projects Shortcut */}
         <section className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-black mb-6">Recent <GradientText>Projects</GradientText></h2>
-            <p className="text-slate-400 mb-8">I've moved the full projects portfolio to its own page for a better browsing experience.</p>
-            <a href="/projects" className="inline-flex items-center gap-3 px-8 py-4 bg-emerald-400 text-slate-900 font-semibold rounded-xl shadow-lg hover:opacity-95 transition">View Projects</a>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="glass-lg rounded-2xl sm:rounded-3xl p-8 sm:p-10 md:p-14 lg:p-16 glow-md text-center">
+              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">Featured <GradientText>Projects</GradientText></h2>
+              <p className="text-slate-300 mb-8 sm:mb-10 text-base sm:text-lg max-w-2xl mx-auto">A collection of recent work showcasing full-stack development, modern UI design, and performance-focused solutions.</p>
+              <motion.a 
+                href="/projects" 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-primary inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5"
+              >
+                Explore Full Portfolio
+                <ArrowRight size={20} />
+              </motion.a>
+            </div>
           </div>
         </section>
 
         {/* Reviews Section */}
-        <section id="reviews" className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-b from-slate-800/10 via-transparent to-slate-800/10">
+        <section id="reviews" className="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1203,12 +1195,12 @@ export default function App() {
               className="mb-10 xs:mb-12 sm:mb-16 md:mb-20 lg:mb-28 text-center"
             >
               <motion.span 
-                className="inline-block text-emerald-400 font-bold tracking-widest uppercase text-xs px-4 xs:px-5 py-2 xs:py-2.5 bg-emerald-400/10 rounded-full border border-emerald-400/30 mb-4 xs:mb-5 sm:mb-6 md:mb-8"
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(16, 185, 129, 0.15)" }}
+                className="inline-block text-blue-400 font-semibold tracking-widest uppercase text-xs px-4 xs:px-5 py-2 xs:py-2.5 glass-sm mb-4 xs:mb-5 sm:mb-6 md:mb-8"
+                whileHover={{ scale: 1.05 }}
               >
                 Testimonials
               </motion.span>
-              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">Client <GradientText>Reviews</GradientText></h2>
+              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">Client <GradientText>Reviews</GradientText></h2>
             </motion.div>
 
             {feedback.length > 0 ? (
@@ -1219,15 +1211,15 @@ export default function App() {
                   ))}
                 </div>
                 <div className="text-center mt-12 sm:mt-16">
-                  <Link to="/feedback" className="inline-flex items-center gap-4 px-10 py-6 bg-slate-800/60 border border-slate-700/50 text-white font-semibold rounded-xl hover:border-emerald-500/30 transition-colors">
+                  <Link to="/feedback" className="btn-primary inline-flex items-center gap-4 px-10 py-6">
                     Leave a Review <ArrowRight size={22} />
                   </Link>
                 </div>
               </>
             ) : (
               <div className="text-center py-32">
-                <p className="text-slate-400 text-2xl">No reviews yet. Be my first client!</p>
-                <Link to="/feedback" className="inline-flex items-center gap-4 px-10 py-6 bg-emerald-400 text-slate-900 font-semibold rounded-xl mt-8 hover:bg-emerald-300 transition-colors">
+                <p className="text-slate-300 text-2xl">No reviews yet. Be my first client!</p>
+                <Link to="/feedback" className="btn-primary inline-flex items-center gap-4 px-10 py-6 mt-8">
                   Leave a Review
                 </Link>
               </div>
@@ -1245,14 +1237,14 @@ export default function App() {
               className="mb-10 xs:mb-12 sm:mb-14 md:mb-18 lg:mb-24 text-center"
             >
               <motion.span 
-                className="inline-block text-emerald-400 font-bold tracking-widest uppercase text-xs px-4 xs:px-5 py-2 xs:py-2.5 bg-emerald-400/10 rounded-full border border-emerald-400/30 mb-4 xs:mb-5 sm:mb-6 md:mb-8"
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(16, 185, 129, 0.15)" }}
+                className="inline-block text-blue-400 font-semibold tracking-widest uppercase text-xs px-4 xs:px-5 py-2 xs:py-2.5 glass-sm mb-4 xs:mb-5 sm:mb-6 md:mb-8"
+                whileHover={{ scale: 1.05 }}
               >
-                Get In Touch
+                Get Started
               </motion.span>
-              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">Let's Work <GradientText>Together</GradientText></h2>
-              <p className="text-sm xs:text-base sm:text-lg md:text-xl text-slate-400 mt-6 xs:mt-7 sm:mt-8 md:mt-10 max-w-2xl mx-auto leading-relaxed font-medium">
-                Have a project in mind? I'd love to hear about it. Let's discuss how I can help bring your ideas to life.
+              <h2 className="text-3xl xs:text-3.5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mt-4 xs:mt-5 sm:mt-6 md:mt-8 leading-tight tracking-tight">Let's Build <GradientText>Together</GradientText></h2>
+              <p className="text-sm xs:text-base sm:text-lg md:text-xl text-slate-300 mt-6 xs:mt-7 sm:mt-8 md:mt-10 max-w-2xl mx-auto leading-relaxed">
+                Have a project in mind or want to discuss opportunities? I'm always excited to collaborate on meaningful work.
               </p>
             </motion.div>
 
@@ -1261,7 +1253,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="p-6 xs:p-7 sm:p-8 md:p-10 lg:p-12 bg-gradient-to-br from-slate-800/50 to-slate-900/40 backdrop-blur-xl border border-slate-700/50 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-2xl shadow-black/30 relative overflow-hidden"
+              className="glass p-6 xs:p-7 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl glow-md relative overflow-hidden"
             >
               {/* Decorative background */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl -z-10" />
@@ -1313,12 +1305,12 @@ export default function App() {
                   <motion.button 
                     type="submit" 
                     disabled={status === 'loading' || status === 'success'}
-                    whileHover={status !== 'loading' && status !== 'success' ? { scale: 1.03, boxShadow: "0 0 40px rgba(16, 185, 129, 0.4)" } : {}}
-                    whileTap={status !== 'loading' && status !== 'success' ? { scale: 0.97 } : {}}
-                    className={`w-full py-4 xs:py-4.5 sm:py-5 md:py-5.5 lg:py-6.5 rounded-lg sm:rounded-lg md:rounded-xl lg:rounded-2xl text-sm xs:text-base sm:text-base md:text-lg font-bold flex items-center justify-center gap-2.5 xs:gap-3 sm:gap-3 md:gap-4 transition-all tracking-wide touch-target min-h-[44px] ${
-                      status === 'success' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/40' : 
-                      status === 'error' ? 'bg-red-500 text-white shadow-lg shadow-red-500/40' : 
-                      'bg-gradient-to-r from-emerald-400 to-lime-400 text-slate-950 hover:shadow-2xl hover:shadow-emerald-400/50 disabled:opacity-60 shadow-lg shadow-emerald-400/30'
+                    whileHover={status !== 'loading' && status !== 'success' ? { scale: 1.02 } : {}}
+                    whileTap={status !== 'loading' && status !== 'success' ? { scale: 0.98 } : {}}
+                    className={`w-full btn-accent py-4 xs:py-4.5 sm:py-5 md:py-5.5 lg:py-6 rounded-lg sm:rounded-lg md:rounded-xl lg:rounded-2xl text-sm xs:text-base sm:text-base md:text-lg font-semibold flex items-center justify-center gap-2.5 xs:gap-3 sm:gap-3 md:gap-4 transition-all tracking-wide touch-target min-h-[44px] ${
+                      status === 'success' ? 'bg-green-500 text-white shadow-lg' : 
+                      status === 'error' ? 'bg-red-500 text-white shadow-lg' : 
+                      'disabled:opacity-60'
                     }`}
                   >
                     {status === 'loading' ? <Loader2 className="animate-spin" size={22} /> : 

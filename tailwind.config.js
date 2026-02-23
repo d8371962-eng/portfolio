@@ -17,6 +17,11 @@ export default {
         obsidian: "#09090b",
         "obsidian-light": "#0c0c0e",
         emerald: "#10b981",
+        luxury: {
+          dark: "#0f172a",
+          darker: "#0a0e27",
+          gold: "#fbd34d",
+        }
       },
       fontSize: {
         base: "1rem",
